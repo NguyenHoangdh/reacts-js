@@ -2,10 +2,16 @@ import Header from "./components/Header/Header";
 import MainContent from "./components/MainContent/MainContent";
 import { myData } from "../data";
 import TabButton from "./TabButton";
+import {useState} from "react";
+
 
 function App() {
-   function handleSelect(selectedButton) {
-        alert(`${selectedButton} được click`);
+  const [selectedTopic, setSelectedTopic] = useState("Vui lòng click vào nút");
+
+  console.log("App được gọi");
+  
+  function handleSelect(selectedButton) {
+      setSelectedTopic(selectedButton);
     }
   return (
     <>
@@ -26,10 +32,10 @@ function App() {
           <h2>Example</h2>
           {/* prettier-ignore */}
           <menu>
-            <li><button>Components</button></li>
+            {/* <li><button>Components</button></li>
             <li><button>JSX</button></li>
             <li><button>Props</button></li>
-            <li><button>State</button></li>
+            <li><button>State</button></li> */}
 
             <TabButton onSelect={() => handleSelect('Components')}>Components</TabButton>
             {/* <TabButton aaa ="Components"></TabButton> */}
@@ -37,6 +43,7 @@ function App() {
             <TabButton onSelect={() => handleSelect('Props')}>Props</TabButton>
             <TabButton onSelect={() => handleSelect('State')}>State</TabButton>
           </menu>
+          {selectedTopic}
         </section>
       </main>
     </>
