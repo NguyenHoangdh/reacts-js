@@ -1,12 +1,11 @@
 import Header from "./components/Header/Header";
 import MainContent from "./components/MainContent/MainContent";
-import { myData } from "../data";
+import { myData, EXAMPLES } from "../data";
 import TabButton from "./TabButton";
 import {useState} from "react";
 
-
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("Vui lòng click vào nút");
+  const [selectedTopic, setSelectedTopic] = useState("components");
 
   console.log("App được gọi");
   
@@ -37,13 +36,23 @@ function App() {
             <li><button>Props</button></li>
             <li><button>State</button></li> */}
 
-            <TabButton onSelect={() => handleSelect('Components')}>Components</TabButton>
+            <TabButton onSelect={() => handleSelect('components')}>Components</TabButton>
             {/* <TabButton aaa ="Components"></TabButton> */}
-            <TabButton onSelect={() => handleSelect('JSX')}>JSX</TabButton>
-            <TabButton onSelect={() => handleSelect('Props')}>Props</TabButton>
-            <TabButton onSelect={() => handleSelect('State')}>State</TabButton>
+            <TabButton onSelect={() => handleSelect('jsx')}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
-          {selectedTopic}
+          <div id="tab-content">
+            {/* <h3>{EXAMPLES.selectedTopic.title}</h3> */}
+              {/* bracket notation */}
+            <h3>{EXAMPLES[selectedTopic].title}</h3> 
+            <p>{EXAMPLES[selectedTopic].desc}</p> 
+            <pre>
+              <code>
+                {EXAMPLES[selectedTopic].code}
+              </code>
+            </pre>
+          </div>
         </section>
       </main>
     </>
