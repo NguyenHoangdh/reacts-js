@@ -5,10 +5,21 @@ import TabButton from "./TabButton";
 import {useState} from "react";
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("components");
+  const [selectedTopic, setSelectedTopic] = useState();
 
-  console.log("App được gọi");
-  
+  let tabContent = <p>Vui lòng chọn chủ đề</p>;
+  if (selectedTopic) {
+    tabContent = (<div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3> 
+            <p>{EXAMPLES[selectedTopic].desc}</p> 
+            <pre>
+              <code>
+                {EXAMPLES[selectedTopic].code}
+              </code>
+            </pre>
+          </div>
+    );
+  }
   function handleSelect(selectedButton) {
       setSelectedTopic(selectedButton);
     }
@@ -31,20 +42,22 @@ function App() {
           <h2>Example</h2>
           {/* prettier-ignore */}
           <menu>
-            {/* <li><button>Components</button></li>
-            <li><button>JSX</button></li>
-            <li><button>Props</button></li>
-            <li><button>State</button></li> */}
-
-            <TabButton onSelect={() => handleSelect('components')}>Components</TabButton>
-            {/* <TabButton aaa ="Components"></TabButton> */}
-            <TabButton onSelect={() => handleSelect('jsx')}>JSX</TabButton>
-            <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
-            <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
-          </menu>
-          <div id="tab-content">
-            {/* <h3>{EXAMPLES.selectedTopic.title}</h3> */}
-              {/* bracket notation */}
+            {/* dùng toán tử 3 ngôi */}
+            {/* {!selectedTopic ? (<p>Vui lòng click vào nút để lựa chọn chủ đề</p>) :
+              (<div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3> 
+            <p>{EXAMPLES[selectedTopic].desc}</p> 
+            <pre>
+              <code>
+                {EXAMPLES[selectedTopic].code}
+              </code>
+            </pre>
+          </div>)
+            } */}
+            {/* cách 2: && */}
+            {/* {!selectedTopic && <p>Vui lòng click vào nút để chọn 1 chủ đề</p>}
+            {selectedTopic && (
+              <div id="tab-content">
             <h3>{EXAMPLES[selectedTopic].title}</h3> 
             <p>{EXAMPLES[selectedTopic].desc}</p> 
             <pre>
@@ -53,6 +66,15 @@ function App() {
               </code>
             </pre>
           </div>
+            )} */}
+            {/* cách 3: */}
+            <TabButton onSelect={() => handleSelect('components')}>Components</TabButton>
+            {/* <TabButton aaa ="Components"></TabButton> */}
+            <TabButton onSelect={() => handleSelect('jsx')}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
+          </menu>
+          {tabContent}
         </section>
       </main>
     </>
